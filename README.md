@@ -103,13 +103,34 @@ The server will start at `http://localhost:8000/`
 http://localhost:8000
 ```
 
-### User Routes
+### Task Routes
 ```
-GET    /users          # Get all users
-GET    /users/:id      # Get user by ID
-POST   /users          # Create new user
-PUT    /users/:id      # Update user
-DELETE /users/:id      # Delete user
+GET    /tasks              # Get all tasks
+POST   /tasks              # Create new task
+GET    /tasks/:id          # Get task by ID
+PUT    /tasks/:id          # Update task
+DELETE /tasks/:id          # Delete task
+PATCH  /tasks/:id/toggle   # Toggle task completion status
+```
+
+#### Example Request Bodies
+
+**Create Task (POST /tasks)**
+```json
+{
+  "title": "Complete project documentation",
+  "description": "Write comprehensive README and API docs",
+  "completed": false
+}
+```
+
+**Update Task (PUT /tasks/:id)**
+```json
+{
+  "title": "Updated task title",
+  "description": "Updated description",
+  "completed": true
+}
 ```
 
 ## 🏗️ Architecture
@@ -135,8 +156,8 @@ Response ← Error Handler ← Controller ← Service ← Model ← Database
 Request validation is handled using **Zod schemas** with a custom validation middleware:
 
 ```typescript
-// Example: Validating user creation
-app.post('/users', validate(userSchema), userController.create);
+// Example: Validating task creation
+app.post('/tasks', validate(createTaskSchema), taskController.createTask);
 ```
 
 ## 🐛 Error Handling

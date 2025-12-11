@@ -1,6 +1,6 @@
-import 'dotenv/config'; 
+import 'dotenv/config';
 import express, { Request, Response } from "express";
-import userRoutes from "./routes/user.routes";
+import taskRoutes from "./routes/task.routes";
 import { loggerMiddleware } from "./middlewares/logger.middleware";
 import { errorHandler } from "./middlewares/error.middleware";
 import { connectDB } from "./config/database";
@@ -10,10 +10,10 @@ app.use(express.json());
 app.use(loggerMiddleware);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello Express + TypeScript + pnpm!");
+  res.send("Todo App API - Express + TypeScript + MongoDB");
 });
 
-app.use("/users", userRoutes);
+app.use("/tasks", taskRoutes);
 
 app.use(errorHandler);
 

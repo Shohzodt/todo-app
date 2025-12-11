@@ -1,8 +1,13 @@
 import { Response } from 'express';
 import { StatusCodes } from '../constants/status-codes';
 
-export const successResponse = (res: Response, data: any, message: string = 'Success') => {
-  return res.status(StatusCodes.OK).json({
+export const successResponse = (
+  res: Response,
+  data: any,
+  message: string = 'Success',
+  statusCode: number = StatusCodes.OK
+) => {
+  return res.status(statusCode).json({
     success: true,
     message,
     data,
